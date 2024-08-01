@@ -9,3 +9,9 @@
   font-family: "Inter";
   font-weight: 900;
 }
+
+@font-face {
+  src: url(../vendor/fonts/Inter-Medium.woff2) format("woff2");
+  font-family: "Inter";
+  font-weight: 500;
+}
