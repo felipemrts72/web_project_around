@@ -45,12 +45,14 @@
   width: 21px;
   height: 19px;
   margin: 5px 3px 1px 0;
+  cursor: pointer;
 }
 
-@media screen and (max-width: 833px) {
+@media screen and (max-width: 875px) {
   .cards {
     max-width: 581px;
     grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(3, 361px);
   }
 }
 
@@ -59,5 +61,6 @@
     margin-top: 36px;
     max-width: 282px;
     grid-template-columns: 1fr;
+    grid-template-rows: repeat(6, 361px);
   }
 }

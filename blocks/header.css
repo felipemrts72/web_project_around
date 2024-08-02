@@ -15,7 +15,6 @@
   margin-top: 40px;
   height: 120px;
   align-items: center;
-  width: 100%;
 }
 
 .header__avatar {
@@ -27,18 +26,22 @@
   display: flex;
   align-items: center;
   flex-direction: column;
-  margin: 0 18.8% 0 30px;
+  margin: 0 165px 0 30px;
+  object-fit: contain;
+  box-sizing: border-box;
 }
 .header__wrap {
   display: flex;
+  max-width: 415px;
+  height: 39px;
 }
 .header__title {
   font-size: 42px;
   line-height: 48px;
   font-weight: 500;
-  height: 39px;
   margin: 0;
-  width: 375px;
+  white-space: nowrap;
+  max-width: 373px;
 }
 
 .header__subtitle {
@@ -50,20 +53,32 @@
 }
 
 .header__edit-button {
-  width: 24px;
-  height: 24px;
+  max-width: 24px;
+  width: 100%;
   margin: 15px 0 0 18px;
   cursor: pointer;
 }
 
 .header__add {
-  width: 150px;
-  height: 50px;
-  align-self: center;
-  font-size: 22px;
-  line-height: 22px;
+  max-width: 150px;
+  width: 100%;
+  max-height: 50px;
+  height: 100%;
+  cursor: pointer;
 }
-@media screen and (max-width: 833px) {
+@media screen and (max-width: 875px) {
+  .header {
+    max-width: 720px;
+  }
+
+  .header__profile-edit {
+    margin: 0 15% 0 3%;
+  }
+
+  .header__title {
+    font-size: 32px;
+    line-height: 38px;
+  }
 }
 
 @media screen and (max-width: 320px) {
@@ -105,17 +120,16 @@
     text-align: center;
   }
   .header__edit-button {
-    width: 18px;
-    height: 18px;
     margin: 4px 0 0 10px;
+    width: 18px;
   }
 
   .header__subtitle {
-    margin: 14px 0 36px;
-    align-self: center;
+    margin: 14px auto 36px;
   }
   .header__add {
-    width: 100%;
+    width: 282px;
     height: 50px;
+    margin: 0 auto;
   }
 }
