@@ -63,7 +63,7 @@
   font-size: 22px;
   line-height: 22px;
 }
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 833px) {
 }
 
 @media screen and (max-width: 320px) {
@@ -71,6 +71,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    height: 412px;
+    margin-bottom: 0;
   }
 
   .header__logo {
