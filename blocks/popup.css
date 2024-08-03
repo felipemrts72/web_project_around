@@ -1,0 +1,67 @@
+.popup {
+  max-width: 515px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+}
+.popup__close {
+  text-align: right;
+  align-self: flex-end;
+  width: 40px;
+  margin: 0 0 5px 15px;
+}
+.popup__block {
+  border-radius: 10px;
+  max-width: 430px;
+  width: 100%;
+  margin: 0 auto;
+  background-color: white;
+}
+.popup__title {
+  align-self: flex-start;
+  color: black;
+  font-size: 24px;
+  font-weight: 900;
+  line-height: 29.05px;
+  max-width: 330px;
+  margin: 34px auto 54px;
+}
+.popup__form {
+  max-width: 358px;
+  width: 100%;
+  margin: 0 auto;
+  color: rgba(196, 196, 196, 1);
+}
+.popup__name {
+  width: 100%;
+  padding: 0;
+  height: 27px;
+  margin-bottom: 27px;
+  border: none;
+  border-bottom: 1px solid rgba(196, 196, 196, 1);
+}
+
+.popup__about {
+  max-width: 358px;
+  width: 100%;
+  height: 27px;
+  padding: 0;
+  margin: 0 auto 48px;
+  border: none;
+  border-bottom: 1px solid rgba(196, 196, 196, 1);
+}
+
+.popup__submit {
+  max-width: 358px;
+  width: 100%;
+  border: 1px;
+  height: 50px;
+  margin-bottom: 36px;
+  border: 1px solid rgba(196, 196, 196, 1);
+  background-color: white;
+  font-size: 18px;
+  color: rgba(196, 196, 196, 1);
+  line-height: 21.78px;
+  text-align: center;
+}
