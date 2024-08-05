@@ -4,5 +4,19 @@
   margin: 67px 0 60px;
   color: rgba(84, 84, 84, 1);
   margin: 67px auto 60px;
-  font-family: "Inter", Arial, Helvetica, sans-serif;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+@media screen and (max-width: 875px) {
+  .footer {
+    max-width: 580px;
+  }
+}
+
+@media screen and (max-width: 660px) {
+  .footer {
+    max-width: 282px;
+  }
 }

@@ -40,7 +40,10 @@
   line-height: 48px;
   font-weight: 500;
   margin: 0;
+  letter-spacing: -1px;
+  text-overflow: ellipsis;
   white-space: nowrap;
+  overflow: hidden;
   max-width: 373px;
 }
 
@@ -50,6 +53,10 @@
   margin-top: 16px;
   font-size: 18px;
   line-height: 22px;
+  max-width: 373px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .header__edit-button {
@@ -89,7 +96,7 @@
   }
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 660px) {
   .header {
     display: flex;
     flex-direction: column;

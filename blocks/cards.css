@@ -51,6 +51,9 @@
 .cards__like:hover {
   opacity: 0.6;
 }
+.cards__liked:active {
+  background-image: url(../images/active__liked.png);
+}
 
 @media screen and (max-width: 875px) {
   .cards {
@@ -60,7 +63,7 @@
   }
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 660px) {
   .cards {
     margin-top: 36px;
     max-width: 282px;
