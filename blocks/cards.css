@@ -39,7 +39,9 @@
   font-size: 24px;
   font-weight: 900;
   line-height: 29.05px;
-  letter-spacing: -1px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 .cards__like {
   width: 21px;

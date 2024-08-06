@@ -29,15 +29,15 @@ closeButton.addEventListener("click", closePopup);
 
 // editar o popup (fazer o titulo e subtitulo do header mudar para o que o usuário colocar no input do popup)
 const popupForm = document.querySelector(".popup__form");
-const submitButton = document.querySelector(".popup__submit");
 
 function editPopup(evt) {
+  evt.preventDefault();
+  //Trás o nome e o subtitulo para o formulário
   nameEdit.textContent = userName.value;
   aboutEdit.textContent = userAbout.value;
   //salvar o popup
   popup.classList.remove("popup_opened");
   overlay.classList.remove("popup-overlay_opened");
-  evt.preventDefault();
 }
 
-submitButton.addEventListener("click", editPopup);
+popupForm.addEventListener("submit", editPopup);
