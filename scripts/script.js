@@ -46,6 +46,7 @@ popupForm.addEventListener("submit", editPopup);
 
 /* <---------------------------------------- SECTION CARDS ---------------------------------------> */
 
+/* <-------------------- ADICIONANDO CARTÕES BASE --------------------> */
 const initialCards = [
   //Cartões base
   {
@@ -94,5 +95,3 @@ initialCards.forEach((card) => {
   const cardElement = createCard(card); //será criado um cartão, e...
   cardsContainer.prepend(cardElement); //Será adicionado no primeiro lugar do conteiner que vai armazenar os cartões
 });
-
-//ADICIONANDO MAIS CARTÕES AO SITE
