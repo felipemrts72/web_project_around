@@ -48,7 +48,7 @@
           class="popup__close"
         />
         <div class="popup__block">
-          <h3 class="popup__title"></h3>
+          <h3 class="popup__title">Editar perfil</h3>
           <form class="popup__form">
             <input
               type="text"
@@ -65,6 +65,34 @@
               required
             />
             <button type="submit" class="popup__submit">Salvar</button>
+          </form>
+        </div>
+      </div>
+
+      <div class="add-popup">
+        <img
+          src="./images/Close_Iconexix.svg"
+          alt="botão para fechar o formulário"
+          class="add-popup__close"
+        />
+        <div class="add-popup__block">
+          <h3 class="add-popup__title">Editar perfil</h3>
+          <form class="add-popup__form">
+            <input
+              type="text"
+              class="add-popup__input"
+              id="titulo"
+              placeholder="Título"
+              required
+            />
+            <input
+              type="text"
+              class="add-popup__input"
+              id="link"
+              placeholder="Link da imagem"
+              required
+            />
+            <button type="submit" class="add-popup__submit">Salvar</button>
           </form>
         </div>
       </div>
@@ -92,7 +120,7 @@
               </svg>
               <img src="#" alt="" class="cards__image" />
               <div class="cards__desc">
-                <h2 class="cards__title">Vale de Yosemite</h2>
+                <h2 class="cards__title"></h2>
                 <img
                   src="./images/Group.png"
                   class="cards__like"
@@ -101,6 +129,9 @@
               </div>
             </li>
           </template>
+          <div>
+            <ul class="card"></ul>
+          </div>
         </section>
       </main>
     </div>
