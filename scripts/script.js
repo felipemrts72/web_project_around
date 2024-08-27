@@ -12,7 +12,6 @@ const popupTitle = document.querySelector(".popup__title");
 
 function openPopup() {
   popup.classList.add("popup_opened");
-  popupTitle.textContent = "Editar Perfil";
   overlay.classList.add("popup-overlay_opened");
   //quando abrir, vir com as informações
   userName.value = nameEdit.textContent;
@@ -75,7 +74,7 @@ const initialCards = [
   },
 ];
 
-//Função que lê o objeto com os cartões-base
+// Função que lê o objeto com os cartões-base
 function createCard(initialCards) {
   const cardTemplete = document.querySelector("#cards-template").content; //Seleciona o template e já pega seu conteudo (content)
   const cardElement = cardTemplete
@@ -95,3 +94,71 @@ initialCards.forEach((card) => {
   const cardElement = createCard(card); //será criado um cartão, e...
   cardsContainer.prepend(cardElement); //Será adicionado no primeiro lugar do conteiner que vai armazenar os cartões
 });
+
+//Abre o add-popup
+
+const addPopupButton = document.querySelector(".header__add");
+const addPopup = document.querySelector(".add-popup");
+const createTitle = document.querySelector("#titulo");
+const createLink = document.querySelector("#link");
+
+function openLocal() {
+  addPopup.classList.add("add-popup_opened");
+  overlay.classList.add("popup-overlay_opened");
+  createTitle.value = "";
+  createLink.value = "";
+}
+
+addPopupButton.addEventListener("click", openLocal);
+
+// -------------------- Fechar o add-popup --------------------
+const closeAddPopupButton = document.querySelector(".add-popup__close");
+
+function closeLocal() {
+  addPopup.classList.remove("add-popup_opened");
+  overlay.classList.remove("popup-overlay_opened");
+}
+closeAddPopupButton.addEventListener("click", closeLocal);
+
+// -------------------- Criar um novo cartão de local! --------------------
+const createPopupForm = document.querySelector(".add-popup__form");
+
+function createLocal(evt) {
+  evt.preventDefault();
+  const cardTemplete = document.querySelector("#cards-template").content; //Seleciona o template e já pega seu conteudo (content)
+  const cardElement = cardTemplete
+    .querySelector(".cards__item")
+    .cloneNode(true); //Clona o template
+
+  cardElement.querySelector(".cards__title").textContent = createTitle.value;
+  cardElement.querySelector(".cards__image").src = createLink.value;
+  cardElement
+    .querySelector(".cards__trash")
+    .addEventListener("click", (evt) => {
+      evt.target.parentElement.parentElement.remove();
+    });
+  cardsContainer.prepend(cardElement);
+
+  addPopup.classList.remove("add-popup_opened");
+  overlay.classList.remove("popup-overlay_opened");
+  return cardElement;
+  // removeFun();
+}
+
+createPopupForm.addEventListener("submit", createLocal);
+
+// -------------------- Remover um local --------------------
+
+function rmvItem(evt) {
+  evt.target.parentElement.parentElement.remove();
+}
+
+function removeFun() {
+  let removeButton = document.querySelectorAll(".cards__trash");
+  removeCard = Array.from(removeButton);
+
+  for (const rmvButton of removeCard) {
+    rmvButton.addEventListener("click", rmvItem);
+  }
+}
+removeFun();
