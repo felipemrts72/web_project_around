@@ -64,8 +64,47 @@
 .cards__like:hover {
   opacity: 0.6;
 }
-.cards__liked:active {
+.cards__like_active {
   background-image: url(../images/active__liked.png);
+}
+
+.cards__zoom {
+  display: none;
+  max-width: 80vw;
+  max-height: 80vw;
+  margin: 0 auto;
+  display: none;
+  flex-direction: column;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+}
+
+.cards__zoom_open {
+  display: flex;
+}
+
+.cards__zoom-close {
+  align-self: flex-end;
+  text-align: right;
+  width: 5%;
+  margin-bottom: 15px;
+  cursor: pointer;
+}
+
+.cards__zoom-image {
+  display: block;
+  max-width: 75vw;
+  max-height: 75vh;
+  margin: auto;
+}
+
+.cards__zoom-title {
+  margin-top: 10px;
+  font-size: 12px;
+  font-weight: normal;
 }
 
 @media screen and (max-width: 875px) {
