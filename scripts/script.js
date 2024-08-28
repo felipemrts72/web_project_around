@@ -101,8 +101,8 @@ function createCard(card) {
   cardElement.querySelector(".cards__image").setAttribute("src", card.link);
   cardElement
     .querySelector(".cards__trash")
-    .addEventListener("click", (event) => {
-      event.target.parentElement.parentElement.remove();
+    .addEventListener("click", (evt) => {
+      evt.target.parentElement.remove();
     });
   cardElement
     .querySelector(".cards__like")
