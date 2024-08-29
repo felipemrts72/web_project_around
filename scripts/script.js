@@ -16,6 +16,11 @@ function openPopup() {
   //quando abrir, vir com as informações
   userName.value = nameEdit.textContent;
   userAbout.value = aboutEdit.textContent;
+  //Fechar quando clicar fora do formulário.
+  overlay.addEventListener("click", (event) => {
+    popup.classList.remove("popup_opened");
+    overlay.classList.remove("popup-overlay_opened");
+  });
 }
 editButton.addEventListener("click", openPopup);
 
@@ -45,7 +50,7 @@ popupForm.addEventListener("submit", editPopup);
 
 /* <---------------------------------------- SECTION CARDS ---------------------------------------> */
 
-/* <-------------------- ADICIONANDO CARTÕES BASE --------------------> */
+/* <--------------------  CARTÕES BASE --------------------> */
 const initialCards = [
   //Cartões base
   {
@@ -74,7 +79,7 @@ const initialCards = [
   },
 ];
 
-// Adiciona cartão
+// ------------------------------- Adiciona cartão ---------------------------------------------
 const cardsContainer = document.querySelector(".cards"); //Seleciona uma div sem conteudo
 const createTitle = document.querySelector("#titulo");
 const createLink = document.querySelector("#link");
@@ -154,6 +159,10 @@ function openLocal() {
   overlay.classList.add("popup-overlay_opened");
   createTitle.value = "";
   createLink.value = "";
+  overlay.addEventListener("click", (evt) => {
+    addPopup.classList.remove("add-popup_opened");
+    overlay.classList.remove("popup-overlay_opened");
+  });
 }
 
 addPopupButton.addEventListener("click", openLocal);
