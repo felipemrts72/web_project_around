@@ -167,7 +167,7 @@ submitButton.addEventListener("click", addNewCard);
 
 const addPopupButton = document.querySelector(".header__add");
 
-function openLocal() {
+function openLocal(data) {
   addPopup.classList.add("add-popup_opened");
   overlay.classList.add("popup-overlay_opened");
   createTitle.value = "";
@@ -176,6 +176,8 @@ function openLocal() {
     addPopup.classList.remove("add-popup_opened");
     overlay.classList.remove("popup-overlay_opened");
   });
+  submitButton.setAttribute("disabled", true);
+  submitButton.classList.add("form__submit_type_disabled");
 }
 
 addPopupButton.addEventListener("click", openLocal);

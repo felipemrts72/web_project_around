@@ -59,7 +59,7 @@ function enableValidation(data) {
   }
 }
 
-// ---------- Configurações ----------
+// ---------- Configurações dos formulários ----------
 enableValidation({
   formSelector: ".form",
   inputSelector: ".form__input",
