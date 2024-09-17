@@ -83,7 +83,7 @@ const initialCards = [
 const cardsContainer = document.querySelector(".cards"); //Seleciona uma div sem conteudo
 const createTitle = document.querySelector("#titulo");
 const createLink = document.querySelector("#link");
-const submitButton = document.querySelector(".add-popup__submit");
+const submitButton = document.querySelector("#add-submit");
 const addPopup = document.querySelector(".add-popup");
 
 function addNewCard(event) {
