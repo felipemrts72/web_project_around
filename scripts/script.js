@@ -116,6 +116,8 @@ function createCard(card) {
         .querySelector(".cards__like")
         .classList.toggle("cards__like_active");
     });
+
+  //ZOOM
   cardElement
     .querySelector(".cards__image")
     .addEventListener("click", (event) => {
@@ -126,15 +128,26 @@ function createCard(card) {
       zoomCardImage.setAttribute("src", card.link);
       zoomCardText.textContent = card.name;
       overlay.classList.add("popup-overlay_opened");
+
+      //Fecha a img
+      const closeImg = () => {
+        zoomCard.classList.remove("cards__zoom_open");
+        overlay.classList.remove("popup-overlay_opened");
+      };
+
       document
         .querySelector(".cards__zoom-close")
         .addEventListener("click", (event) => {
-          zoomCard.classList.remove("cards__zoom_open");
-          overlay.classList.remove("popup-overlay_opened");
+          closeImg();
         });
       overlay.addEventListener("click", (event) => {
-        zoomCard.classList.remove("cards__zoom_open");
-        overlay.classList.remove("popup-overlay_opened");
+        closeImg();
+      });
+      //Fecha a imagem pelo ESC
+      document.addEventListener("keydown", (evt) => {
+        if (evt.key === "Escape") {
+          closeImg();
+        }
       });
     });
 
