@@ -1,4 +1,5 @@
 import Card from "./Card.js";
+import FormValidator from "./FormValidator.js";
 
 //fazer o Popup aparecer
 const editButton = document.querySelector(".header__edit-button");
@@ -168,3 +169,30 @@ addPopupButton.addEventListener("click", openLocal);
 const closeAddPopupButton = document.querySelector(".add-popup__close");
 
 closeAddPopupButton.addEventListener("click", closePopups);
+
+// -------------------- Valida o formulário --------------------
+new FormValidator(
+  {
+    formSelector: ".form",
+    inputSelector: ".form__input",
+    submitButtonSelector: ".form__submit",
+    inactiveButtonClass: "form__submit_type_disabled",
+    inputErrorClass: "form__input_type_error",
+    errorClass: "form__error_visible",
+    fieldsetClass: "fieldset",
+  },
+  "#profile-form"
+).enableValidation();
+
+new FormValidator(
+  {
+    formSelector: ".form",
+    inputSelector: ".form__input",
+    submitButtonSelector: ".form__submit",
+    inactiveButtonClass: "form__submit_type_disabled",
+    inputErrorClass: "form__input_type_error",
+    errorClass: "form__error_visible",
+    fieldsetClass: "fieldset",
+  },
+  "#cards-form"
+).enableValidation();
