@@ -1,3 +1,5 @@
+import Card from "./Card.js";
+
 //fazer o Popup aparecer
 const editButton = document.querySelector(".header__edit-button");
 const popup = document.querySelector(".popup");
@@ -27,11 +29,12 @@ editButton.addEventListener("click", openPopup);
 // fechar o popup
 const closeButton = document.querySelector(".popup__close");
 
-function closePopup() {
+function closePopups() {
   popup.classList.remove("popup_opened");
   overlay.classList.remove("popup-overlay_opened");
+  addPopup.classList.remove("add-popup_opened");
 }
-closeButton.addEventListener("click", closePopup);
+closeButton.addEventListener("click", closePopups);
 
 // editar o popup (fazer o titulo e subtitulo do header mudar para o que o usuário colocar no input do popup)
 const popupForm = document.querySelector(".popup__form");
@@ -88,76 +91,55 @@ const addPopup = document.querySelector(".add-popup");
 
 function addNewCard(event) {
   event.preventDefault();
-  const addCard = createCard({
-    name: createTitle.value,
-    link: createLink.value,
-  });
+  const addCard = new Card({
+    cardSeletor: "#cards-template",
+    card: {
+      name: createTitle.value,
+      link: createLink.value,
+    },
+    zoomImage,
+  }).createCard();
   cardsContainer.prepend(addCard);
   createTitle.value = "";
   createLink.value = "";
+  closePopups();
 }
 
-function createCard(card) {
-  const cardTemplete = document.querySelector("#cards-template").content; //Seleciona o template e já pega seu conteudo (content)
-  const cardElement = cardTemplete
-    .querySelector(".cards__item")
-    .cloneNode(true); //Clona o template
-  cardElement.querySelector(".cards__title").textContent = card.name;
-  cardElement.querySelector(".cards__image").setAttribute("src", card.link);
-  cardElement
-    .querySelector(".cards__trash")
-    .addEventListener("click", (evt) => {
-      evt.target.parentElement.remove();
-    });
-  cardElement
-    .querySelector(".cards__like")
-    .addEventListener("click", (event) => {
-      cardElement
-        .querySelector(".cards__like")
-        .classList.toggle("cards__like_active");
-    });
+function zoomImage(event) {
+  const imgTarget = event.target;
+  const zoomCard = document.querySelector(".cards__zoom");
+  const zoomCardImage = document.querySelector(".cards__zoom-image");
+  const zoomCardText = document.querySelector(".cards__zoom-title");
+  zoomCard.classList.add("cards__zoom_open");
+  zoomCardImage.setAttribute("src", imgTarget.src);
+  zoomCardText.textContent = imgTarget
+    .closest(".cards__item")
+    .querySelector(".cards__title").textContent;
+  overlay.classList.add("popup-overlay_opened");
 
-  //ZOOM
-  cardElement
-    .querySelector(".cards__image")
-    .addEventListener("click", (event) => {
-      const zoomCard = document.querySelector(".cards__zoom");
-      const zoomCardImage = document.querySelector(".cards__zoom-image");
-      const zoomCardText = document.querySelector(".cards__zoom-title");
-      zoomCard.classList.add("cards__zoom_open");
-      zoomCardImage.setAttribute("src", card.link);
-      zoomCardText.textContent = card.name;
-      overlay.classList.add("popup-overlay_opened");
-
-      //Fecha a img
-      const closeImg = () => {
-        zoomCard.classList.remove("cards__zoom_open");
-        overlay.classList.remove("popup-overlay_opened");
-      };
-
-      document
-        .querySelector(".cards__zoom-close")
-        .addEventListener("click", (event) => {
-          closeImg();
-        });
-      overlay.addEventListener("click", (event) => {
-        closeImg();
-      });
-      //Fecha a imagem pelo ESC
-      document.addEventListener("keydown", (evt) => {
-        if (evt.key === "Escape") {
-          closeImg();
-        }
-      });
-    });
-
-  closeLocal();
-
-  return cardElement; //retorna o templete com os dados atualizados
+  //Fecha a img
+  const closeImg = () => {
+    zoomCard.classList.remove("cards__zoom_open");
+    overlay.classList.remove("popup-overlay_opened");
+  };
+  document
+    .querySelector(".cards__zoom-close")
+    .addEventListener("click", closeImg);
+  overlay.addEventListener("click", closeImg);
+  //Fecha a imagem pelo ESC
+  document.addEventListener("keydown", (evt) => {
+    if (evt.key === "Escape") {
+      closeImg();
+    }
+  });
 }
 
 for (const card of initialCards) {
-  const addCard = createCard(card);
+  const addCard = new Card({
+    cardSeletor: "#cards-template",
+    card,
+    zoomImage,
+  }).createCard();
   cardsContainer.prepend(addCard);
 }
 
@@ -185,8 +167,4 @@ addPopupButton.addEventListener("click", openLocal);
 // -------------------- Fechar o add-popup --------------------
 const closeAddPopupButton = document.querySelector(".add-popup__close");
 
-function closeLocal() {
-  addPopup.classList.remove("add-popup_opened");
-  overlay.classList.remove("popup-overlay_opened");
-}
-closeAddPopupButton.addEventListener("click", closeLocal);
+closeAddPopupButton.addEventListener("click", closePopups);
