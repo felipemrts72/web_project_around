@@ -2,8 +2,6 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const { default: test } = require("node:test");
-const { type } = require("os");
 
 module.exports = {
   devtool: "inline-source-map",
@@ -33,13 +31,13 @@ module.exports = {
         exclude: "/node_modules/",
       },
       {
-        test: /\.js$/,
+        test: /\.css$/,
         use: [
           MiniCssExtractPlugin.loader,
           {
-            loader: `postcss-loader`,
+            loader: `css-loader`,
             options: {
-              options: {},
+              importLoaders: 1,
             },
           },
           "postcss-loader",
