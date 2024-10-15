@@ -1,0 +1,30 @@
+{
+  "name": "web_project_around",
+  "version": "1.0.0",
+  "description": "Esse projeto consiste de uma solicitação feito pela empresa TripleTen. É uma página que descreva belos lugares pelo EUA.\r Para isso, foi utilizado HTML e CSS, usando a metodologia BEM-FLAT, não só nas classes CSS mas também nos arquivos do projeto. Foram utilizados também o Flex-Box e Grid para organização da página, GIT para controle de versão, Branch para criação de ramificações e adição de novas versões. Também foi corretamente versionado para aparelhos dos mais variados tamanhos de tela.\r O projeto será postado também no GITHUB Pages para que o resultado possa ser visto com clareza.",
+  "private": true,
+  "scripts": {
+    "build": "webpack --mode production",
+    "dev": "webpack serve --mode development"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/preset-env": "^7.25.4",
+    "autoprefixer": "^10.4.20",
+    "babel-loader": "^9.2.1",
+    "clean-webpack-plugin": "^4.0.0",
+    "css-loader": "^7.1.2",
+    "cssnano": "^7.0.6",
+    "html-webpack-plugin": "^5.6.0",
+    "mini-css-extract-plugin": "^2.9.1",
+    "postcss-loader": "^8.1.1",
+    "webpack": "^5.94.0",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^5.1.0"
+  },
+  "dependencies": {
+    "core-js": "^3.38.1"
+  }
+}

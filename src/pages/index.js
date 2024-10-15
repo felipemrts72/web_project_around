@@ -1,5 +1,8 @@
-import Card from "./Card.js";
-import FormValidator from "./FormValidator.js";
+import "./index.css";
+
+import Section from "../components/Section.js";
+import Card from "../components/Card.js";
+import FormValidator from "../components/FormValidator.js";
 import {
   editButton,
   closeButton,
@@ -16,7 +19,9 @@ import {
   editPopup,
   zoomImage,
   openLocal,
-} from "./utils.js";
+  config,
+} from "../components/utils.js";
+import Popup from "../components/Popup.js";
 
 function addNewCard(event) {
   event.preventDefault();
@@ -33,28 +38,41 @@ function addNewCard(event) {
   createLink.value = "";
   closePopups();
 }
+const popup = new Popup(config.popupClass);
+
+// Adiciona o cartão inserido pelo usuário | Adds new card entered by the user
+submitButton.addEventListener("click", addNewCard);
 
 // Editar o perfil | Profile Edit
-editButton.addEventListener("click", openPopup);
+editButton.addEventListener("click", popup.open());
 
 // Fecha o popup | Close profile popup
-closeButton.addEventListener("click", closePopups);
+closeButton.addEventListener("click", popup.close());
 
 // Envia os dados colocados pelo o usuário para o perfil | Sends data entered by the user
 popupForm.addEventListener("submit", editPopup);
 
 // Adiciona os cartões base | Adds default cards
-for (const card of initialCards) {
+function renderCards(card) {
   const addCard = new Card({
-    cardSeletor: "#cards-template",
+    cardSeletor: config.cardTemplateId,
     card,
     zoomImage,
   }).createCard();
-  cardsContainer.prepend(addCard);
+  sectionCards.setItem(addCard);
 }
 
-// Adiciona o cartão inserido pelo usuário | Adds new card entered by the user
-submitButton.addEventListener("click", addNewCard);
+const sectionCards = new Section(
+  {
+    items: initialCards,
+    renderer: renderCards,
+  },
+  config
+);
+sectionCards.renderItems();
+
+for (const card of initialCards) {
+}
 
 // Abre o popup de cartões | Open cards-popup
 addPopupButton.addEventListener("click", openLocal);

@@ -3,7 +3,6 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./pages/index.css" />
     <title>Around the U.S</title>
   </head>
   <body>
@@ -11,14 +10,14 @@
       <header class="header">
         <div class="header__logo">
           <img
-            src="./images/logo.png"
+            src="<%=require('./images/logo.png')%>"
             alt="Logo do site, ao logo dos estados unidos"
             class="header__logo-item"
           />
         </div>
         <div class="header__profile">
           <img
-            src="./images/Avatar.jpg"
+            src="<%=require('./images/Avatar.jpg')%>"
             alt="Foto de perfil do usuário"
             class="header__avatar"
           />
@@ -26,7 +25,7 @@
             <div class="header__wrap">
               <h1 class="header__title">Jacques Cousteau</h1>
               <img
-                src="./images/Edit_Button.png"
+                src="<%=require('./images/Edit_Button.png')%>"
                 class="header__edit-button"
                 alt="Um botão com uma canela, simbolizando a edição!"
               />
@@ -34,7 +33,7 @@
             <p class="header__subtitle">Desenvolvedor Web</p>
           </div>
           <img
-            src="./images/Add_Button.png"
+            src="<%=require('./images/Add_Button.png')%>"
             class="header__add"
             alt="Um botão com um simbolo de mais, simbolizando a adição de mais fotos!"
           />
@@ -43,7 +42,7 @@
       <div class="popup-overlay"></div>
       <div class="popup">
         <img
-          src="./images/Close_Iconexix.svg"
+          src="<%=require('./images/Close_Iconexix.svg')%>"
           alt="botão para fechar o formulário"
           class="popup__close"
         />
@@ -81,7 +80,7 @@
 
       <div class="add-popup">
         <img
-          src="./images/Close_Iconexix.svg"
+          src="<%=require('./images/Close_Iconexix.svg')%>"
           alt="botão para fechar o formulário"
           class="add-popup__close"
         />
@@ -122,7 +121,7 @@
           <template id="cards-template">
             <li class="cards__item">
               <img
-                src="./images/Trash.svg"
+                src="<%=require('./images/Trash.svg')%>"
                 alt="lixeira que representa que irá apagar o local selecionado"
                 class="cards__trash"
               />
@@ -130,7 +129,7 @@
               <div class="cards__desc">
                 <h2 class="cards__title"></h2>
                 <img
-                  src="./images/like_button.png"
+                  src="<%=require('./images/like_button.png')%>"
                   class="cards__like"
                   alt="Um botão com um coração, simbolizando o curtir!"
                 />
@@ -139,7 +138,7 @@
           </template>
           <div class="cards__zoom">
             <img
-              src="./images/Close_Iconexix.svg"
+              src="<%=require('./images/Close_Iconexix.svg')%>"
               alt="botão para fechar o formulário"
               class="cards__zoom-close"
             />

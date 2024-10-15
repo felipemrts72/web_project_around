@@ -43,6 +43,12 @@ export const initialCards = [
   },
 ];
 
+export const config = {
+  cardTemplateId: "#cards-template",
+  cardsContainer,
+  popupClass: "popup_opened",
+};
+
 export function openPopup() {
   popup.classList.add("popup_opened");
   overlay.classList.add("popup-overlay_opened");
