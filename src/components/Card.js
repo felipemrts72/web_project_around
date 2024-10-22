@@ -1,8 +1,8 @@
 export default class Card {
-  constructor({ cardSeletor, card, zoomImage }) {
+  constructor({ cardSeletor, card, handleCardClick }) {
     this._cardSeletor = cardSeletor;
     this._card = card;
-    this._zoomImage = zoomImage;
+    this._handleCardClick = handleCardClick;
   }
   _getTemplate() {
     const cardTemplete = document
@@ -37,7 +37,7 @@ export default class Card {
 
     this._element
       .querySelector(".cards__image")
-      .addEventListener("click", this._zoomImage);
+      .addEventListener("click", this._handleCardClick);
   }
 
   createCard() {
