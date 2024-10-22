@@ -1,12 +1,37 @@
 export default class Popup {
-  constructor(popupSelector) {
-    this._popupSelector = popupSelector;
+  constructor({ popupClass }) {
+    this._popup = popupClass;
+    this._popupElement = document.querySelector(this._popup);
+    this._overlay = document.querySelector(".popup-overlay");
+    this._closePopup = this._popupElement.querySelector(".popup__close");
+  }
+  open() {
+    this._popupElement.classList.add("popup_opened");
+    this._overlay.classList.add("popup-overlay_opened");
+    this.setEventListeners();
   }
 
-  open() {
-    popup.classList.add("popup_opened");
-  }
   close() {
-    popup.classList.remove("popup_opened");
+    this._popupElement.classList.remove("popup_opened");
+    this._overlay.classList.remove("popup-overlay_opened");
+    this._popupElement.classList.remove("cards__zoom_open");
+  }
+
+  _handleEscClose(evt) {
+    if (evt.key == "Escape") {
+      this.close();
+    }
+  }
+  setEventListeners() {
+    this._closePopup.addEventListener("click", () => {
+      this.close();
+    });
+    this._overlay.addEventListener("click", () => {
+      this.close();
+    });
+
+    document.addEventListener("keydown", (evt) => {
+      this._handleEscClose(evt);
+    });
   }
 }
