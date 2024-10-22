@@ -1,84 +1,76 @@
 import "./index.css";
 
-import Section from "../components/Section.js";
 import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
+import Popup from "../components/Popup.js";
+import PopupWithForm from "../components/PopupWithForm.js";
+import PopupWithImage from "../components/PopupWithImage.js";
+import Section from "../components/Section.js";
+import UserInfo from "../components/UserInfo.js";
 import {
   editButton,
-  closeButton,
-  popupForm,
   cardsContainer,
-  createTitle,
-  createLink,
-  submitButton,
+  cardSubmit,
   addPopupButton,
-  closeAddPopupButton,
   initialCards,
-  openPopup,
-  closePopups,
-  editPopup,
-  zoomImage,
-  openLocal,
-  config,
+  profileSubmit,
 } from "../components/utils.js";
-import Popup from "../components/Popup.js";
 
-function addNewCard(event) {
-  event.preventDefault();
-  const addCard = new Card({
-    cardSeletor: "#cards-template",
-    card: {
-      name: createTitle.value,
-      link: createLink.value,
-    },
-    zoomImage,
-  }).createCard();
-  cardsContainer.prepend(addCard);
-  createTitle.value = "";
-  createLink.value = "";
-  closePopups();
+//-------------------- Formulário adicionar cartões -------------------------
+
+const formPopup = new PopupWithForm({
+  popupClass: ".add-popup",
+  submitCallBack: (data) => {
+    const addCard = new Card({
+      cardSeletor: "#cards-template",
+      card: {
+        name: data.name,
+        link: data.link,
+      },
+      handleCardClick,
+    }).createCard();
+    section.addItem(addCard);
+  },
+});
+
+const openCardPopup = () => {
+  formPopup.open();
+};
+
+// Abre o popup de cartões | Open cards-popup
+addPopupButton.addEventListener("click", openCardPopup);
+
+// Envia os dados do cartão e o adiciona na seção
+
+cardSubmit.addEventListener("submit", formPopup);
+
+// -------------------------- Abre imagem ao clicar -------------------------
+const imgPopup = new PopupWithImage({ popupClass: ".cards__zoom" });
+
+function handleCardClick(evt) {
+  imgPopup.open(evt.target);
 }
-const popup = new Popup(config.popupClass);
 
-// Adiciona o cartão inserido pelo usuário | Adds new card entered by the user
-submitButton.addEventListener("click", addNewCard);
+//---------------------------------------------------------------
 
-// Editar o perfil | Profile Edit
-editButton.addEventListener("click", popup.open());
-
-// Fecha o popup | Close profile popup
-closeButton.addEventListener("click", popup.close());
-
-// Envia os dados colocados pelo o usuário para o perfil | Sends data entered by the user
-popupForm.addEventListener("submit", editPopup);
-
-// Adiciona os cartões base | Adds default cards
 function renderCards(card) {
   const addCard = new Card({
-    cardSeletor: config.cardTemplateId,
+    cardSeletor: "#cards-template",
     card,
-    zoomImage,
+    handleCardClick,
   }).createCard();
-  sectionCards.setItem(addCard);
+  section.addItem(addCard);
 }
 
-const sectionCards = new Section(
+const section = new Section(
   {
     items: initialCards,
     renderer: renderCards,
   },
-  config
+  cardsContainer
 );
-sectionCards.renderItems();
 
-for (const card of initialCards) {
-}
-
-// Abre o popup de cartões | Open cards-popup
-addPopupButton.addEventListener("click", openLocal);
-
-// Fechar o popup de cartões | Close cards-popup
-closeAddPopupButton.addEventListener("click", closePopups);
+section.renderItems();
 
 // -------------------- Valida o formulário --------------------
 new FormValidator(
@@ -106,3 +98,22 @@ new FormValidator(
   },
   "#cards-form"
 ).enableValidation();
+
+// -------------------- Editar o perfil | Profile Edit ----------------------------
+const userData = new UserInfo({ userNameClass: "#name", userJobClass: "#job" });
+const openProfile = new Popup({ popupClass: ".popup" });
+
+editButton.addEventListener("click", () => {
+  openProfile.open();
+  userData.getUserInfo();
+});
+
+// Envia os dados colocados pelo o usuário para o perfil | Sends data entered by the user
+
+profileSubmit.addEventListener("submit", (e) => {
+  e.preventDefault();
+  userData.setUserInfo();
+  openProfile.close();
+});
+
+//---------------------------------------------------------------

@@ -3,7 +3,6 @@ export default class Popup {
     this._popup = popupClass;
     this._popupElement = document.querySelector(this._popup);
     this._overlay = document.querySelector(".popup-overlay");
-    this._closePopup = this._popupElement.querySelector(".popup__close");
   }
   open() {
     this._popupElement.classList.add("popup_opened");
@@ -23,9 +22,13 @@ export default class Popup {
     }
   }
   setEventListeners() {
-    this._closePopup.addEventListener("click", () => {
-      this.close();
-    });
+    console.log(this._popupElement);
+
+    this._popupElement
+      .querySelector(".popup__close")
+      .addEventListener("click", () => {
+        this.close();
+      });
     this._overlay.addEventListener("click", () => {
       this.close();
     });

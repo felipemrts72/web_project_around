@@ -65,7 +65,7 @@
               <input
                 type="text"
                 class="form__input"
-                id="about"
+                id="job"
                 placeholder="Sobre mim"
                 required
                 minlength="2"
@@ -73,20 +73,22 @@
               />
               <span class="form__error"></span>
             </fieldset>
-            <button type="submit" class="form__submit">Salvar</button>
+            <button type="submit" class="form__submit" id="profile-submit">
+              Salvar
+            </button>
           </form>
         </div>
       </div>
 
-      <div class="add-popup">
+      <div class="add-popup popup">
         <img
           src="<%=require('./images/Close_Iconexix.svg')%>"
           alt="botão para fechar o formulário"
-          class="add-popup__close"
+          class="popup__close add-popup__close"
         />
-        <div class="add-popup__block">
-          <h3 class="add-popup__title">Novo local</h3>
-          <form class="add-popup__form form" id="cards-form" novalidate>
+        <div class="popup__block">
+          <h3 class="popup__title">Novo local</h3>
+          <form class="popup__form form" id="cards-form" novalidate>
             <fieldset class="form__input-block">
               <input
                 type="text"
@@ -149,6 +151,6 @@
       </main>
     </div>
     <footer class="footer">&copy;Felipe Menezes, 2024 Around The U.S.</footer>
-    <script type="module" src="./scripts/script.js"></script>
+    <script type="module" src="./pages/index.js"></script>
   </body>
 </html>
