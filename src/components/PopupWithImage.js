@@ -16,12 +16,4 @@ export default class PopupWithImage extends Popup {
       .closest(".cards__item")
       .querySelector(".cards__title").textContent;
   }
-  setEventListeners() {
-    super.setEventListeners();
-    this._popupElement
-      .querySelector(".cards__zoom-closepopup__close")
-      .addEventListener("click", () => {
-        this.close();
-      });
-  }
 }

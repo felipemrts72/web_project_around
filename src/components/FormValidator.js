@@ -26,9 +26,11 @@ export default class FormValidator {
   // ---------- Verifica se o input é válido ----------
   _checkIsValid(event) {
     this._input = event.target;
-    const isValid = this._input.validity.valid;
+    const isValid = this._inputs.some((input) => {
+      return !input.validity.valid;
+    });
 
-    if (!isValid) {
+    if (isValid) {
       this._input.classList.add();
       this._disableSubmit();
       this._addErrorMessage();
@@ -49,8 +51,7 @@ export default class FormValidator {
 
   // ---------- Faz com que o Botão se torne inativo ----------
   _disableSubmit() {
-    const form = this._input.closest(this._data.formSelector);
-    const submitBtn = form.querySelector(this._data.submitButtonSelector);
+    const submitBtn = this._form.querySelector(this._data.submitButtonSelector);
     submitBtn.setAttribute("disabled", true);
     submitBtn.classList.add(this._data.inactiveButtonClass);
   }
@@ -61,6 +62,10 @@ export default class FormValidator {
   }
 
   _setEventListeners() {
+    if (this._formSelector == "#cards-form") {
+      this._disableSubmit();
+    }
+
     for (const input of this._inputs) {
       input.addEventListener("input", (evt) => {
         this._checkIsValid(evt);

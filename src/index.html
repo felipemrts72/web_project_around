@@ -119,35 +119,34 @@
       </div>
 
       <main class="content">
-        <section class="cards">
-          <template id="cards-template">
-            <li class="cards__item">
-              <img
-                src="<%=require('./images/Trash.svg')%>"
-                alt="lixeira que representa que irá apagar o local selecionado"
-                class="cards__trash"
-              />
-              <img src="#" alt="" class="cards__image" />
-              <div class="cards__desc">
-                <h2 class="cards__title"></h2>
-                <img
-                  src="<%=require('./images/like_button.png')%>"
-                  class="cards__like"
-                  alt="Um botão com um coração, simbolizando o curtir!"
-                />
-              </div>
-            </li>
-          </template>
-          <div class="cards__zoom">
+        <section class="cards"></section>
+        <template id="cards-template">
+          <li class="cards__item">
             <img
-              src="<%=require('./images/Close_Iconexix.svg')%>"
-              alt="botão para fechar o formulário"
-              class="cards__zoom-close"
+              src="<%=require('./images/Trash.svg')%>"
+              alt="lixeira que representa que irá apagar o local selecionado"
+              class="cards__trash"
             />
-            <img src="#" alt="#" class="cards__zoom-image" />
-            <h2 class="cards__zoom-title"></h2>
-          </div>
-        </section>
+            <img src="#" alt="" class="cards__image" />
+            <div class="cards__desc">
+              <h2 class="cards__title"></h2>
+              <img
+                src="<%=require('./images/like_button.png')%>"
+                class="cards__like"
+                alt="Um botão com um coração, simbolizando o curtir!"
+              />
+            </div>
+          </li>
+        </template>
+        <div class="cards__zoom">
+          <img
+            src="<%=require('./images/Close_Iconexix.svg')%>"
+            alt="botão para fechar o formulário"
+            class="cards__zoom-close popup__close"
+          />
+          <img src="#" alt="#" class="cards__zoom-image" />
+          <h2 class="cards__zoom-title"></h2>
+        </div>
       </main>
     </div>
     <footer class="footer">&copy;Felipe Menezes, 2024 Around The U.S.</footer>

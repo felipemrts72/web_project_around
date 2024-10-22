@@ -16,34 +16,6 @@ import {
   profileSubmit,
 } from "../components/utils.js";
 
-//-------------------- Formulário adicionar cartões -------------------------
-
-const formPopup = new PopupWithForm({
-  popupClass: ".add-popup",
-  submitCallBack: (data) => {
-    const addCard = new Card({
-      cardSeletor: "#cards-template",
-      card: {
-        name: data.name,
-        link: data.link,
-      },
-      handleCardClick,
-    }).createCard();
-    section.addItem(addCard);
-  },
-});
-
-const openCardPopup = () => {
-  formPopup.open();
-};
-
-// Abre o popup de cartões | Open cards-popup
-addPopupButton.addEventListener("click", openCardPopup);
-
-// Envia os dados do cartão e o adiciona na seção
-
-cardSubmit.addEventListener("submit", formPopup);
-
 // -------------------------- Abre imagem ao clicar -------------------------
 const imgPopup = new PopupWithImage({ popupClass: ".cards__zoom" });
 
@@ -73,7 +45,7 @@ const section = new Section(
 section.renderItems();
 
 // -------------------- Valida o formulário --------------------
-new FormValidator(
+const profileValidator = new FormValidator(
   {
     formSelector: ".form",
     inputSelector: ".form__input",
@@ -84,9 +56,9 @@ new FormValidator(
     fieldsetClass: "fieldset",
   },
   "#profile-form"
-).enableValidation();
+);
 
-new FormValidator(
+const cardValidator = new FormValidator(
   {
     formSelector: ".form",
     inputSelector: ".form__input",
@@ -97,7 +69,7 @@ new FormValidator(
     fieldsetClass: "fieldset",
   },
   "#cards-form"
-).enableValidation();
+);
 
 // -------------------- Editar o perfil | Profile Edit ----------------------------
 const userData = new UserInfo({ userNameClass: "#name", userJobClass: "#job" });
@@ -106,6 +78,7 @@ const openProfile = new Popup({ popupClass: ".popup" });
 editButton.addEventListener("click", () => {
   openProfile.open();
   userData.getUserInfo();
+  profileValidator.enableValidation();
 });
 
 // Envia os dados colocados pelo o usuário para o perfil | Sends data entered by the user
@@ -117,3 +90,32 @@ profileSubmit.addEventListener("submit", (e) => {
 });
 
 //---------------------------------------------------------------
+
+//-------------------- Formulário adicionar cartões -------------------------
+
+const formPopup = new PopupWithForm({
+  popupClass: ".add-popup",
+  submitCallBack: (data) => {
+    const addCard = new Card({
+      cardSeletor: "#cards-template",
+      card: {
+        name: data.name,
+        link: data.link,
+      },
+      handleCardClick,
+    }).createCard();
+    section.addItem(addCard);
+  },
+});
+
+const openCardPopup = () => {
+  formPopup.open();
+  cardValidator.enableValidation();
+};
+
+// Abre o popup de cartões | Open cards-popup
+addPopupButton.addEventListener("click", openCardPopup);
+
+// Envia os dados do cartão e o adiciona na seção
+
+cardSubmit.addEventListener("submit", formPopup);
