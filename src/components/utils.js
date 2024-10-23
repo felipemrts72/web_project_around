@@ -4,7 +4,7 @@ export const addCloseButton = document.querySelector(".add-popup__close");
 export const popupForm = document.querySelector(".popup__form");
 export const profileSubmit = document.querySelector("#profile-form");
 export const cardsContainer = document.querySelector(".cards");
-export const cardSubmit = document.querySelector("#add-submit");
+export const cardSubmit = document.querySelector("#cards-form");
 export const addPopupButton = document.querySelector(".header__add");
 export const initialCards = [
   //Cartões base
