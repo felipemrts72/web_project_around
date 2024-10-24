@@ -118,4 +118,6 @@ addPopupButton.addEventListener("click", openCardPopup);
 
 // Envia os dados do cartão e o adiciona na seção
 
-cardSubmit.addEventListener("submit", formPopup);
+cardSubmit.addEventListener("submit", () => {
+  formPopup.submitPopup();
+});
