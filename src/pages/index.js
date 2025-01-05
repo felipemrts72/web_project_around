@@ -27,6 +27,10 @@ const api = new Api({
   },
 });
 
+// -------------------------- Pega dos dados do Usúario no Servidor -------------------------
+
+api.getData("users/me").then((res) => console.log(res));
+
 // -------------------------- Abre imagem ao clicar -------------------------
 const imgPopup = new PopupWithImage({ popupClass: ".cards__zoom" });
 
