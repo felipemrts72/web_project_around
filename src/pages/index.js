@@ -1,5 +1,6 @@
 import "./index.css";
 
+import Api from "../components/Api.js";
 import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
 import Popup from "../components/Popup.js";
@@ -15,6 +16,16 @@ import {
   initialCards,
   profileSubmit,
 } from "../components/utils.js";
+
+//-------------------------- Instância de API.js --------------------------
+
+const api = new Api({
+  url: "https://around-api.pt-br.tripleten-services.com/v1/",
+  headers: {
+    authorization: "3c87efb4-b08f-40d5-9262-3c16a56d0588",
+    "Content-Type": "application/json",
+  },
+});
 
 // -------------------------- Abre imagem ao clicar -------------------------
 const imgPopup = new PopupWithImage({ popupClass: ".cards__zoom" });
