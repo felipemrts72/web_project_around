@@ -10,21 +10,20 @@ export default class PopupWithForm extends Popup {
   }
 
   _getInputValues() {
-    if (this._popup == ".add-popup") {
+    if (this._popup == "#add-card") {
       this._title = this._form.querySelector("#titulo").value;
       this._link = this._form.querySelector("#link").value;
 
       return { name: this._title, link: this._link };
-    } else {
+    } else if (this._popup == "#info-update") {
       this._name = this._form.querySelector("#name-input").value;
       this._about = this._form.querySelector("#about-input").value;
 
       return { name: this._name, about: this._about };
+    } else {
+      this._avatar = this._form.querySelector("#avatar-input").value;
+      return this._avatar;
     }
-  }
-
-  submitPopup() {
-    // this._sbmtCB(this._getInputValues());
   }
 
   setEventListeners() {

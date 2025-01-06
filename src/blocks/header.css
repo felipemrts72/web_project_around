@@ -23,6 +23,14 @@
   width: 120px;
   height: 120px;
 }
+
+.header__avatar:hover {
+  opacity: 0.2;
+}
+.header__avatar-edit {
+  background: url(../images/edit__avatar.png) center no-repeat;
+  cursor: pointer;
+}
 .header__profile-edit {
   display: flex;
   align-items: center;

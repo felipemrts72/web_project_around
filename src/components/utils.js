@@ -6,6 +6,7 @@ export const profileSubmit = document.querySelector("#profile-form");
 export const cardsContainer = document.querySelector(".cards");
 export const cardSubmit = document.querySelector("#cards-form");
 export const addPopupButton = document.querySelector(".header__add");
+export const avatar = document.querySelector(".header__avatar");
 export const profileClasses = {
   nameClass: ".header__title",
   aboutClass: ".header__subtitle",

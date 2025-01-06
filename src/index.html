@@ -16,7 +16,9 @@
           />
         </div>
         <div class="header__profile">
-          <img src="#" ="Foto de perfil do usuário" class="header__avatar" />
+          <div class="header__avatar-edit">
+            <img src="#" ="Foto de perfil do usuário" class="header__avatar" />
+          </div>
           <div class="header__profile-edit">
             <div class="header__wrap">
               <h1 class="header__title"></h1>
@@ -36,7 +38,7 @@
         </div>
       </header>
       <div class="popup-overlay"></div>
-      <div class="popup">
+      <div class="popup" id="info-update">
         <img
           src="<%=require('./images/Close_Iconexix.svg')%>"
           alt="botão para fechar o formulário"
@@ -75,8 +77,34 @@
           </form>
         </div>
       </div>
-
-      <div class="add-popup popup">
+      <div class="popup-profile popup" id="avatar-update">
+        <img
+          src="<%=require('./images/Close_Iconexix.svg')%>"
+          alt="botão para fechar o formulário"
+          class="popup__close"
+        />
+        <div class="popup__block">
+          <h3 class="popup__title">Alterar a foto do perfil</h3>
+          <form class="popup__form form" id="profile-form" novalidate>
+            <fieldset class="form__input-block">
+              <input
+                type="url"
+                class="form__input"
+                id="avatar-input"
+                placeholder="Url da foto"
+                required
+                minlength="2"
+                maxlength="200"
+              />
+              <span class="form__error"></span>
+            </fieldset>
+            <button type="submit" class="form__submit" id="profile-submit">
+              Salvar
+            </button>
+          </form>
+        </div>
+      </div>
+      <div class="add-popup popup" id="add-card">
         <img
           src="<%=require('./images/Close_Iconexix.svg')%>"
           alt="botão para fechar o formulário"

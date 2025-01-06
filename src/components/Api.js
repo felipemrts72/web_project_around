@@ -1,3 +1,5 @@
+import { avatar } from "./utils";
+
 export default class Api {
   constructor({ url, headers }) {
     this._url = url;
@@ -28,6 +30,21 @@ export default class Api {
       }),
     }).then((res) => {
       if (res.ok) {
+        return res.json();
+      }
+      return Promise.reject(`Error: ${res.status}`);
+    });
+  }
+  avatarEdit(url) {
+    return fetch(`${this._url}users/me`, {
+      method: "PATCH",
+      body: JSON.stringify({
+        avatar: url,
+      }),
+    }).then((res) => {
+      if (res.ok) {
+        console.log(res);
+
         return res.json();
       }
       return Promise.reject(`Error: ${res.status}`);

@@ -16,6 +16,7 @@ import {
   initialCards,
   profileSubmit,
   profileClasses,
+  avatar,
 } from "../components/utils.js";
 
 //-------------------------- Instância de API.js --------------------------
@@ -37,8 +38,10 @@ api.getData("users/me").then((res) => {
 
 // -------------------- Editar o perfil | Profile Edit ----------------------------
 
+// Informações do Perfil
+
 const profilePopup = new PopupWithForm({
-  popupClass: ".popup",
+  popupClass: "#info-update",
   submitCallBack: (data) => {
     api.profileEdit(data);
     userData.setUserInfo(data); //Para tornar a experiência do Usúario mais rápida!
@@ -50,15 +53,22 @@ editButton.addEventListener("click", () => {
   profileValidator.enableValidation();
 });
 
-// Envia os dados colocados pelo o usuário para o perfil | Sends data entered by the user
-
-// profileSubmit.addEventListener("submit", (e) => {
-//   e.preventDefault();
-//   userData.setUserInfo();
-//   profilePopup.close();
-// });
-
 //---------------------------------------------------------------
+
+// Foto do perfil
+const avatarPoup = new PopupWithForm({
+  popupClass: "#avatar-update",
+  submitCallBack: (url) => {
+    console.log(url);
+
+    api.avatarEdit(url);
+    userData.setUserAvt(url);
+  },
+});
+
+avatar.addEventListener("click", () => {
+  avatarPoup.open();
+});
 
 // -------------------------- Abre imagem ao clicar -------------------------
 const imgPopup = new PopupWithImage({ popupClass: ".cards__zoom" });
@@ -67,8 +77,10 @@ function handleCardClick(evt) {
   imgPopup.open(evt.target);
 }
 
-//---------------------------------------------------------------
-
+//---------------------- Recebe os cartões do Servidor -------------------------
+api.getData("cards").then((res) => {
+  console.log(res);
+});
 function renderCards(card) {
   const addCard = new Card({
     cardSeletor: "#cards-template",
