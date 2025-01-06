@@ -15,6 +15,7 @@ import {
   addPopupButton,
   initialCards,
   profileSubmit,
+  profileClasses,
 } from "../components/utils.js";
 
 //-------------------------- Instância de API.js --------------------------
@@ -28,8 +29,36 @@ const api = new Api({
 });
 
 // -------------------------- Pega dos dados do Usúario no Servidor -------------------------
+const userData = new UserInfo(profileClasses);
+api.getData("users/me").then((res) => {
+  userData.setUserInfo(res);
+  userData.setUserAvt(res.avatar);
+});
 
-api.getData("users/me").then((res) => console.log(res));
+// -------------------- Editar o perfil | Profile Edit ----------------------------
+
+const profilePopup = new PopupWithForm({
+  popupClass: ".popup",
+  submitCallBack: (data) => {
+    api.profileEdit(data);
+    userData.setUserInfo(data); //Para tornar a experiência do Usúario mais rápida!
+  },
+});
+
+editButton.addEventListener("click", () => {
+  profilePopup.open();
+  profileValidator.enableValidation();
+});
+
+// Envia os dados colocados pelo o usuário para o perfil | Sends data entered by the user
+
+// profileSubmit.addEventListener("submit", (e) => {
+//   e.preventDefault();
+//   userData.setUserInfo();
+//   profilePopup.close();
+// });
+
+//---------------------------------------------------------------
 
 // -------------------------- Abre imagem ao clicar -------------------------
 const imgPopup = new PopupWithImage({ popupClass: ".cards__zoom" });
@@ -86,29 +115,9 @@ const cardValidator = new FormValidator(
   "#cards-form"
 );
 
-// -------------------- Editar o perfil | Profile Edit ----------------------------
-const userData = new UserInfo({ userNameClass: "#name", userJobClass: "#job" });
-const openProfile = new Popup({ popupClass: ".popup" });
-
-editButton.addEventListener("click", () => {
-  openProfile.open();
-  userData.getUserInfo();
-  profileValidator.enableValidation();
-});
-
-// Envia os dados colocados pelo o usuário para o perfil | Sends data entered by the user
-
-profileSubmit.addEventListener("submit", (e) => {
-  e.preventDefault();
-  userData.setUserInfo();
-  openProfile.close();
-});
-
-//---------------------------------------------------------------
-
 //-------------------- Formulário adicionar cartões -------------------------
 
-const formPopup = new PopupWithForm({
+const cardPopup = new PopupWithForm({
   popupClass: ".add-popup",
   submitCallBack: (data) => {
     const addCard = new Card({
@@ -124,7 +133,7 @@ const formPopup = new PopupWithForm({
 });
 
 const openCardPopup = () => {
-  formPopup.open();
+  cardPopup.open();
   cardValidator.enableValidation();
 };
 
@@ -134,5 +143,5 @@ addPopupButton.addEventListener("click", openCardPopup);
 // Envia os dados do cartão e o adiciona na seção
 
 cardSubmit.addEventListener("submit", () => {
-  formPopup.submitPopup();
+  cardPopup.submitPopup();
 });

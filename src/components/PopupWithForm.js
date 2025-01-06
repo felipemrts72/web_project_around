@@ -5,27 +5,33 @@ export default class PopupWithForm extends Popup {
     super({ popupClass });
     this._popup = popupClass;
     this._popupElement = document.querySelector(this._popup);
-    this._closeBtn = this._popupElement.querySelector(".add-popup__close");
-
     this._sbmtCB = submitCallBack;
-    this._form = this._popupElement.querySelector("#cards-form");
+    this._form = this._popupElement.querySelector(".form");
   }
 
   _getInputValues() {
-    this._title = this._form.querySelector("#titulo").value;
-    this._link = this._form.querySelector("#link").value;
+    if (this._popup == ".add-popup") {
+      this._title = this._form.querySelector("#titulo").value;
+      this._link = this._form.querySelector("#link").value;
 
-    return { name: this._title, link: this._link };
+      return { name: this._title, link: this._link };
+    } else {
+      this._name = this._form.querySelector("#name-input").value;
+      this._about = this._form.querySelector("#about-input").value;
+
+      return { name: this._name, about: this._about };
+    }
   }
 
   submitPopup() {
-    this._sbmtCB(this._getInputValues());
+    // this._sbmtCB(this._getInputValues());
   }
 
   setEventListeners() {
     super.setEventListeners();
     this._form.addEventListener("submit", (evt) => {
       evt.preventDefault();
+      this._sbmtCB(this._getInputValues());
       this.close();
     });
   }

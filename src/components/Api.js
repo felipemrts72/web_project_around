@@ -16,7 +16,7 @@ export default class Api {
     });
   }
 
-  profileEdit(name, about) {
+  profileEdit({ name, about }) {
     return fetch(`${this._url}/users/me`, {
       //Para não colocar muitos parametros (e ter os 2 exemplos), coloquei o profileEdit com o endereço direto.
       method: "PATCH", //PATCH significa que a solicitação irá ATUALIZAR os dados já colocados no Servidor (Substituílos, basicamente.)
