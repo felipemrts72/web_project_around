@@ -13,8 +13,6 @@ import {
   cardsContainer,
   cardSubmit,
   addPopupButton,
-  initialCards,
-  profileSubmit,
   profileClasses,
   avatar,
 } from "../components/utils.js";
@@ -78,8 +76,18 @@ function handleCardClick(evt) {
 }
 
 //---------------------- Recebe os cartões do Servidor -------------------------
-api.getData("cards").then((res) => {
-  console.log(res);
+let section;
+
+api.getData("cards").then((cards) => {
+  section = new Section(
+    {
+      items: cards,
+      renderer: renderCards,
+    },
+    cardsContainer
+  );
+
+  section.renderItems();
 });
 function renderCards(card) {
   const addCard = new Card({
@@ -89,16 +97,6 @@ function renderCards(card) {
   }).createCard();
   section.addItem(addCard);
 }
-
-const section = new Section(
-  {
-    items: initialCards,
-    renderer: renderCards,
-  },
-  cardsContainer
-);
-
-section.renderItems();
 
 // -------------------- Valida o formulário --------------------
 const profileValidator = new FormValidator(

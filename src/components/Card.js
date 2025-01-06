@@ -46,12 +46,6 @@ export default class Card {
     this._element
       .querySelector(".cards__image")
       .setAttribute("src", this._card.link);
-
-    this._element.querySelector(".cards__title").textContent = this._card.name;
-    this._element
-      .querySelector(".cards__image")
-      .setAttribute("src", this._card.link);
-
     this._setEventListeners();
     return this._element; //retorna o templete com os dados atualizados
   }
