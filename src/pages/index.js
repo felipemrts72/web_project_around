@@ -7,6 +7,7 @@ import PopupWithForm from "../components/PopupWithForm.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import Section from "../components/Section.js";
 import UserInfo from "../components/UserInfo.js";
+import PopupWithConfirmation from "../components/PopupWithConfirmation.js";
 import {
   editButton,
   cardsContainer,
@@ -77,11 +78,11 @@ function handleCardClick(evt) {
 }
 
 //---------------------- Recebe os cartões do Servidor -------------------------
-
+let section;
 api.getData("cards").then((cards) => {
   console.log(cards);
 
-  const section = new Section(
+  section = new Section(
     {
       items: cards,
       renderer: (card) => {
@@ -98,7 +99,9 @@ function renderCards(card) {
     cardSeletor: "#cards-template",
     card,
     handleCardClick,
-    deleteCard,
+    deleteCard: () => {
+      delCard.open(card);
+    },
     owner: owner,
     likeCard,
     unLikeCard,
@@ -108,20 +111,23 @@ function renderCards(card) {
 
 //-------------------- Deleta Cartões -------------------------
 
-function deleteCard(id) {
-  api
-    .deleteCard(id)
-    .then((res) => {
-      if (res.status == 200) {
-        return null;
-      } else {
-        return Promise.reject(res.status);
-      }
-    })
-    .catch((error) => {
-      console.log(`Error - DELETE - ${error} | CARD ${id}`);
-    });
-}
+const delCard = new PopupWithConfirmation({
+  popupClass: "#confirmation-popup",
+  submitCallBack: (card) => {
+    return api
+      .deleteCard(card._id)
+      .then((res) => {
+        if (res.ok) {
+          section.renderItems();
+        }
+        Promise.reject(err);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  },
+});
+delCard.setEventListeners();
 
 //-------------------- Curte Cartão -------------------------
 

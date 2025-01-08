@@ -4,9 +4,9 @@ export default class Card {
     card,
     handleCardClick,
     deleteCard,
+    owner: owner,
     likeCard,
     unLikeCard,
-    owner,
   }) {
     this._cardSeletor = cardSeletor;
     this._card = card;
@@ -24,11 +24,8 @@ export default class Card {
     return cardTemplete;
   }
 
-  _removeCard(evt) {
-    if ((this._card.owner = this._owner)) {
-      evt.target.parentElement.remove();
-      this._deleteCard(this._card._id);
-    }
+  removeCard() {
+    this._element.remove();
   }
 
   _likeCardToggle() {
@@ -59,7 +56,7 @@ export default class Card {
     this._element
       .querySelector(".cards__trash")
       .addEventListener("click", (evt) => {
-        this._removeCard(evt);
+        this._deleteCard();
       });
 
     this._element

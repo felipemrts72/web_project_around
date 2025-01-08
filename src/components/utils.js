@@ -8,6 +8,7 @@ export const addPopupButton = document.querySelector(".header__add");
 export const avatar = document.querySelector(".header__avatar");
 export const titleInput = document.querySelector("#titulo");
 export const linkInput = document.querySelector("#link");
+export const delButton = document.querySelector("#confirmation-submit");
 export const profileClasses = {
   nameClass: ".header__title",
   aboutClass: ".header__subtitle",
