@@ -36,7 +36,7 @@ export default class Api {
     });
   }
   avatarEdit(url) {
-    return fetch(`${this._url}users/me`, {
+    return fetch(`${this._url}users/me/avatar`, {
       method: "PATCH",
       headers: this._headers,
       body: JSON.stringify({
