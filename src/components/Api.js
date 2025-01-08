@@ -38,6 +38,7 @@ export default class Api {
   avatarEdit(url) {
     return fetch(`${this._url}users/me`, {
       method: "PATCH",
+      headers: this._headers,
       body: JSON.stringify({
         avatar: url,
       }),
@@ -48,6 +49,12 @@ export default class Api {
         return res.json();
       }
       return Promise.reject(`Error: ${res.status}`);
+    });
+  }
+  deleteCard(id) {
+    return fetch(`${this._url}/cards/${id}`, {
+      method: "DELETE",
+      headers: this._headers,
     });
   }
 }
