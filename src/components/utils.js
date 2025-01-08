@@ -11,3 +11,4 @@ export const profileClasses = {
   aboutClass: ".header__subtitle",
   avatarClass: ".header__avatar",
 };
+export const owner = "82fecf60d0d924996629bf4d";

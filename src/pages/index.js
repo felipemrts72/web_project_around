@@ -3,7 +3,6 @@ import "./index.css";
 import Api from "../components/Api.js";
 import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
-import Popup from "../components/Popup.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import Section from "../components/Section.js";
@@ -15,6 +14,7 @@ import {
   addPopupButton,
   profileClasses,
   avatar,
+  owner,
 } from "../components/utils.js";
 
 //-------------------------- Instância de API.js --------------------------
@@ -79,6 +79,8 @@ function handleCardClick(evt) {
 let section;
 
 api.getData("cards").then((cards) => {
+  console.log(cards);
+
   section = new Section(
     {
       items: cards,
@@ -94,9 +96,61 @@ function renderCards(card) {
     cardSeletor: "#cards-template",
     card,
     handleCardClick,
+    deleteCard,
+    owner: owner,
   }).createCard();
   section.addItem(addCard);
 }
+
+//-------------------- Deleta Cartões -------------------------
+
+function deleteCard(id) {
+  api
+    .deleteCard(id)
+    .then((res) => {
+      if (res.status == 200) {
+        return null;
+      } else {
+        return Promise.reject(res.status);
+      }
+    })
+    .catch((error) => {
+      console.log(`Error - DELETE - ${error} | CARD ${id}`);
+    });
+}
+
+//-------------------- Formulário adicionar cartões -------------------------
+
+const cardPopup = new PopupWithForm({
+  popupClass: ".add-popup",
+  submitCallBack: (data) => {
+    const addCard = new Card({
+      cardSeletor: "#cards-template",
+      card: {
+        name: data.name,
+        link: data.link,
+      },
+      handleCardClick,
+      deleteCard,
+      owner: owner,
+    }).createCard();
+    section.addItem(addCard);
+  },
+});
+
+const openCardPopup = () => {
+  cardPopup.open();
+  cardValidator.enableValidation();
+};
+
+// Abre o popup de cartões | Open cards-popup
+addPopupButton.addEventListener("click", openCardPopup);
+
+// Envia os dados do cartão e o adiciona na seção
+
+cardSubmit.addEventListener("submit", () => {
+  cardPopup.submitPopup();
+});
 
 // -------------------- Valida o formulário --------------------
 const profileValidator = new FormValidator(
@@ -124,34 +178,3 @@ const cardValidator = new FormValidator(
   },
   "#cards-form"
 );
-
-//-------------------- Formulário adicionar cartões -------------------------
-
-const cardPopup = new PopupWithForm({
-  popupClass: ".add-popup",
-  submitCallBack: (data) => {
-    const addCard = new Card({
-      cardSeletor: "#cards-template",
-      card: {
-        name: data.name,
-        link: data.link,
-      },
-      handleCardClick,
-    }).createCard();
-    section.addItem(addCard);
-  },
-});
-
-const openCardPopup = () => {
-  cardPopup.open();
-  cardValidator.enableValidation();
-};
-
-// Abre o popup de cartões | Open cards-popup
-addPopupButton.addEventListener("click", openCardPopup);
-
-// Envia os dados do cartão e o adiciona na seção
-
-cardSubmit.addEventListener("submit", () => {
-  cardPopup.submitPopup();
-});

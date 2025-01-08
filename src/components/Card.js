@@ -1,8 +1,10 @@
 export default class Card {
-  constructor({ cardSeletor, card, handleCardClick }) {
+  constructor({ cardSeletor, card, handleCardClick, deleteCard, owner }) {
     this._cardSeletor = cardSeletor;
     this._card = card;
     this._handleCardClick = handleCardClick;
+    this._deleteCard = deleteCard;
+    this._owner = owner;
   }
   _getTemplate() {
     const cardTemplete = document
@@ -13,7 +15,10 @@ export default class Card {
   }
 
   _removeCard(evt) {
-    evt.target.parentElement.remove();
+    if ((this._card.owner = this._owner)) {
+      evt.target.parentElement.remove();
+      this._deleteCard(this._card._id);
+    }
   }
 
   _likeCardToggle() {

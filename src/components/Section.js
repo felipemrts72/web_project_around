@@ -6,13 +6,17 @@ export default class Section {
   }
 
   renderItems() {
+    this._clearContainer();
+
     for (const item of this._items) {
       this._renderer(item);
     }
   }
 
-  addItem(element) {
-    this._container.prepend(element);
-    // console.log(element);
+  addItem(item) {
+    this._container.prepend(item);
+  }
+  _clearContainer() {
+    this._container.innerHTML = "";
   }
 }
