@@ -8,12 +8,12 @@ export default class Section {
   renderItems() {
     this._clearContainer();
 
-    for (const item of this._items) {
-      this._renderer(item);
-    }
+    this._items.forEach((card) => {
+      this._renderer(card);
+    });
   }
 
-  addItem(item) {
+  setItem(item) {
     this._container.prepend(item);
   }
   _clearContainer() {

@@ -10,7 +10,8 @@ import UserInfo from "../components/UserInfo.js";
 import {
   editButton,
   cardsContainer,
-  cardSubmit,
+  titleInput,
+  linkInput,
   addPopupButton,
   profileClasses,
   avatar,
@@ -76,15 +77,16 @@ function handleCardClick(evt) {
 }
 
 //---------------------- Recebe os cartões do Servidor -------------------------
-let section;
 
 api.getData("cards").then((cards) => {
   console.log(cards);
 
-  section = new Section(
+  const section = new Section(
     {
       items: cards,
-      renderer: renderCards,
+      renderer: (card) => {
+        section.setItem(renderCards(card));
+      },
     },
     cardsContainer
   );
@@ -100,8 +102,8 @@ function renderCards(card) {
     owner: owner,
     likeCard,
     unLikeCard,
-  }).createCard();
-  section.addItem(addCard);
+  });
+  return addCard.createCard();
 }
 
 //-------------------- Deleta Cartões -------------------------
@@ -141,23 +143,27 @@ const unLikeCard = (id) => {
 
 const cardPopup = new PopupWithForm({
   popupClass: "#add-card",
-  submitCallBack: (data) => {
-    const addCard = new Card({
-      cardSeletor: "#cards-template",
-      card: {
-        name: data.name,
-        link: data.link,
-      },
-      handleCardClick,
-      deleteCard,
-      likeCard,
-      unLikeCard,
+  submitCallBack: () => {
+    const addCard = {
+      name: titleInput.value,
+      link: linkInput.value,
       owner: owner,
-    }).createCard();
+      createdAt: new Date(),
+    };
+    api
+      .sendCard(addCard)
+      .then((res) => {
+        console.log(res);
 
-    section.addItem(addCard);
+        cardsContainer.prepend(renderCards(res));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   },
 });
+
+cardPopup.setEventListeners();
 
 const openCardPopup = () => {
   cardPopup.open();

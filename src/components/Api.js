@@ -51,6 +51,20 @@ export default class Api {
       return Promise.reject(`Error: ${res.status}`);
     });
   }
+
+  sendCard(data) {
+    return fetch(`${this._url}cards`, {
+      method: "POST",
+      headers: this._headers,
+      body: JSON.stringify({ name: data.name, link: data.link }),
+    }).then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+      return Promise.reject(`Error: ${res.status}`);
+    });
+  }
+
   deleteCard(id) {
     return fetch(`${this._url}/cards/${id}`, {
       method: "DELETE",
