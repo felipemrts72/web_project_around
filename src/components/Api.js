@@ -57,4 +57,30 @@ export default class Api {
       headers: this._headers,
     });
   }
+
+  likeOn(id) {
+    return fetch(`${this._url}/cards/${id}/likes/`, {
+      method: "PUT",
+      headers: this._headers,
+    }).then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+
+      return Promise.reject(`Error: ${res.status}`);
+    });
+  }
+
+  likeOff(id) {
+    return fetch(`${this._url}/cards/${id}/likes/`, {
+      method: "DELETE",
+      headers: this._headers,
+    }).then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+
+      return Promise.reject(`Error: ${res.status}`);
+    });
+  }
 }

@@ -98,6 +98,8 @@ function renderCards(card) {
     handleCardClick,
     deleteCard,
     owner: owner,
+    likeCard,
+    unLikeCard,
   }).createCard();
   section.addItem(addCard);
 }
@@ -119,10 +121,26 @@ function deleteCard(id) {
     });
 }
 
+//-------------------- Curte Cartão -------------------------
+
+const likeCard = (id) => {
+  api.likeOn(id).then((res) => {
+    return res;
+  });
+};
+
+//-------------------- Descurte Cartão -------------------------
+
+const unLikeCard = (id) => {
+  api.likeOff(id).then((res) => {
+    return res;
+  });
+};
+
 //-------------------- Formulário adicionar cartões -------------------------
 
 const cardPopup = new PopupWithForm({
-  popupClass: ".add-popup",
+  popupClass: "#add-card",
   submitCallBack: (data) => {
     const addCard = new Card({
       cardSeletor: "#cards-template",
@@ -132,8 +150,11 @@ const cardPopup = new PopupWithForm({
       },
       handleCardClick,
       deleteCard,
+      likeCard,
+      unLikeCard,
       owner: owner,
     }).createCard();
+
     section.addItem(addCard);
   },
 });
@@ -145,12 +166,6 @@ const openCardPopup = () => {
 
 // Abre o popup de cartões | Open cards-popup
 addPopupButton.addEventListener("click", openCardPopup);
-
-// Envia os dados do cartão e o adiciona na seção
-
-cardSubmit.addEventListener("submit", () => {
-  cardPopup.submitPopup();
-});
 
 // -------------------- Valida o formulário --------------------
 const profileValidator = new FormValidator(

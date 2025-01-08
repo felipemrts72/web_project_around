@@ -1,10 +1,20 @@
 export default class Card {
-  constructor({ cardSeletor, card, handleCardClick, deleteCard, owner }) {
+  constructor({
+    cardSeletor,
+    card,
+    handleCardClick,
+    deleteCard,
+    likeCard,
+    unLikeCard,
+    owner,
+  }) {
     this._cardSeletor = cardSeletor;
     this._card = card;
     this._handleCardClick = handleCardClick;
     this._deleteCard = deleteCard;
     this._owner = owner;
+    this._likeCard = likeCard;
+    this._unLikeCard = unLikeCard;
   }
   _getTemplate() {
     const cardTemplete = document
@@ -22,11 +32,29 @@ export default class Card {
   }
 
   _likeCardToggle() {
-    this._element
-      .querySelector(".cards__like")
-      .classList.toggle("cards__like_active");
+    if (!this._card.isLiked) {
+      this._element
+        .querySelector(".cards__like")
+        .classList.add("cards__like_active");
+      this._likeCard(this._card._id);
+    } else {
+      this._element
+        .querySelector(".cards__like")
+        .classList.remove("cards__like_active");
+      this._unLikeCard(this._card._id);
+    }
   }
-
+  _isLiked() {
+    if (this._card.isLiked) {
+      this._element
+        .querySelector(".cards__like")
+        .classList.add("cards__like_active");
+    } else {
+      this._element
+        .querySelector(".cards__like")
+        .classList.remove("cards__like_active");
+    }
+  }
   _setEventListeners() {
     this._element
       .querySelector(".cards__trash")
@@ -52,6 +80,7 @@ export default class Card {
       .querySelector(".cards__image")
       .setAttribute("src", this._card.link);
     this._setEventListeners();
+    this._isLiked();
     return this._element; //retorna o templete com os dados atualizados
   }
 }
