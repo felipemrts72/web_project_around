@@ -59,8 +59,6 @@ editButton.addEventListener("click", () => {
 const avatarPoup = new PopupWithForm({
   popupClass: "#avatar-update",
   submitCallBack: (url) => {
-    console.log(url);
-
     api.avatarEdit(url);
     userData.setUserAvt(url);
   },
@@ -80,8 +78,6 @@ function handleCardClick(evt) {
 //---------------------- Recebe os cartões do Servidor -------------------------
 let section;
 api.getData("cards").then((cards) => {
-  console.log(cards);
-
   section = new Section(
     {
       items: cards,
@@ -127,7 +123,7 @@ const delCard = new PopupWithConfirmation({
         }
       })
       .catch((err) => {
-        console.log(err);
+        console.log(err); //Validação do Erro
       });
   },
 });
@@ -163,12 +159,10 @@ const cardPopup = new PopupWithForm({
     api
       .sendCard(addCard)
       .then((res) => {
-        console.log(res);
-
         cardsContainer.prepend(renderCards(res));
       })
       .catch((err) => {
-        console.log(err);
+        console.log(err); //Validação do Erro
       });
   },
 });
