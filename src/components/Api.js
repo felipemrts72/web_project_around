@@ -72,7 +72,7 @@ export default class Api {
     });
   }
 
-  likeOn(id) {
+  addLike(id) {
     return fetch(`${this._url}/cards/${id}/likes/`, {
       method: "PUT",
       headers: this._headers,
@@ -85,7 +85,7 @@ export default class Api {
     });
   }
 
-  likeOff(id) {
+  removeLike(id) {
     return fetch(`${this._url}/cards/${id}/likes/`, {
       method: "DELETE",
       headers: this._headers,

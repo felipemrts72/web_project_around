@@ -117,10 +117,14 @@ const delCard = new PopupWithConfirmation({
     return api
       .deleteCard(card._id)
       .then((res) => {
-        if (res.ok) {
+        return res.ok;
+      })
+      .then((res) => {
+        if (res) {
           section.renderItems();
+        } else {
+          return Promise.reject(err);
         }
-        Promise.reject(err);
       })
       .catch((err) => {
         console.log(err);
@@ -132,7 +136,7 @@ delCard.setEventListeners();
 //-------------------- Curte Cartão -------------------------
 
 const likeCard = (id) => {
-  api.likeOn(id).then((res) => {
+  api.addLike(id).then((res) => {
     return res;
   });
 };
@@ -140,7 +144,7 @@ const likeCard = (id) => {
 //-------------------- Descurte Cartão -------------------------
 
 const unLikeCard = (id) => {
-  api.likeOff(id).then((res) => {
+  api.removeLike(id).then((res) => {
     return res;
   });
 };
